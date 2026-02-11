@@ -6,6 +6,7 @@ DB_NAME = os.path.join(BASE_DIR, "hrms.db")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
+    conn.execute("PRAGMA foreign_keys = ON") 
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -25,16 +26,16 @@ def init_db():
     ''')
     
     # Create Attendance Table
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS attendance (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            employee_id TEXT NOT NULL,
-            date TEXT NOT NULL,
-            status TEXT NOT NULL CHECK(status IN ('Present', 'Absent')),
-            FOREIGN KEY (employee_id) REFERENCES employees (id),
-            UNIQUE(employee_id, date)
-        )
-    ''')
+   cursor.execute('''
+    CREATE TABLE IF NOT EXISTS attendance (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        employee_id TEXT NOT NULL,
+        date TEXT NOT NULL,
+        status TEXT NOT NULL CHECK(status IN ('Present', 'Absent')),
+        FOREIGN KEY (employee_id) REFERENCES employees (id) ON DELETE CASCADE,
+        UNIQUE(employee_id, date)
+    )
+   ''')
     
     conn.commit()
     conn.close()
@@ -42,4 +43,5 @@ def init_db():
 
 if __name__ == "__main__":
     init_db()
+
 
