@@ -1,4 +1,4 @@
-const API_BASE = 'http://127.0.0.1:5000/api';
+const API_BASE = '/api';
 
 // --- Utils ---
 async function apiCall(endpoint, method = 'GET', data = null) {
@@ -355,3 +355,4 @@ async function loadEmployeeHistory(id) {
         list.innerHTML = '<tr><td colspan="2" class="empty-state">Failed to load history</td></tr>';
     }
 }
+
