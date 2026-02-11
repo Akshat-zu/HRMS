@@ -1,5 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import sys
+import os
+
+# Add current directory to path so we can import database.py whether running 
+# from root (gunicorn) or from inside backend/ (python app.py)
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from database import get_db_connection, init_db
 import sqlite3
 import uuid
@@ -166,3 +173,5 @@ def get_dashboard_stats():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+
