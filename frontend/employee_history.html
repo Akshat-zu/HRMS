@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Lite - Employee History</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">HRMS Lite</a>
+            <nav>
+                <a href="/">Dashboard</a>
+                <a href="/employees.html" class="active">Employees</a>
+                <a href="/attendance.html">Attendance</a>
+                <a href="/records.html">Records</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="card">
+                <a href="/employees.html"
+                    style="text-decoration: none; color: var(--primary-color); display: inline-block; margin-bottom: 1rem;">&larr;
+                    Back to Employees</a>
+                <h2 id="history-title">Attendance History</h2>
+
+                <div class="grid-3"
+                    style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 1.5rem;">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Total Present</div>
+                        <div class="kpi-value" id="total-present"
+                            style="font-size: 2rem; color: var(--secondary-color)">-</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Total Absent</div>
+                        <div class="kpi-value warning" id="total-absent"
+                            style="font-size: 2rem; color: var(--danger-color)">-</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get ID from URL
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (id) {
+                loadEmployeeHistory(id);
+            } else {
+                showToast('No employee ID provided', 'error');
+            }
+        });
+    </script>
+</body>
+
+</html>

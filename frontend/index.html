@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Lite - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">HRMS Lite</a>
+            <nav>
+                <a href="/" class="active">Dashboard</a>
+                <a href="/employees.html">Employees</a>
+                <a href="/attendance.html">Attendance</a>
+                <a href="/records.html">Records</a>
+            </nav>
+        </header>
+
+        <!-- KPI Section -->
+        <div class="grid-3">
+            <div class="kpi-card">
+                <div class="kpi-title">Total Employees</div>
+                <div class="kpi-value" id="total-employees">-</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Present Today</div>
+                <div class="kpi-value warning" id="present-today" style="color: var(--secondary-color)">-</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Absent Today</div>
+                <div class="kpi-value" id="absent-today" style="color: var(--danger-color)">-</div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="card">
+            <h2>Attendance Trend (Last 7 Days)</h2>
+            <canvas id="attendanceChart" height="100"></canvas>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+            <h2>Quick Actions</h2>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <a href="/employees.html" class="btn btn-primary" style="text-decoration: none;">Manage Employees</a>
+                <a href="/attendance.html" class="btn btn-primary"
+                    style="text-decoration: none; background-color: var(--secondary-color);">Track Attendance</a>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
