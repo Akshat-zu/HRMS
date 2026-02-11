@@ -47,11 +47,10 @@ A lightweight Human Resource Management System built with Flask and Vanilla JS.
 - `POST /api/employees` - Add new employee
 - `DELETE /api/employees/<id>` - Delete employee
 - `GET /api/attendance?search=<query>` - Get attendance records (optional search)
-- screenshot
-- <img width="1904" height="909" alt="image" src="https://github.com/user-attachments/assets/a7fb1514-a917-42bf-bf07-fc6186abf8f4" />
-
-
 - `GET /api/attendance/<id>` - Get attendance for specific employee
 - `POST /api/attendance` - Mark attendance
 - `GET /api/dashboard-stats` - Get dashboard KPIs and trend data
+- - screenshot
+- <img width="1904" height="909" alt="image" src="https://github.com/user-attachments/assets/a7fb1514-a917-42bf-bf07-fc6186abf8f4" />
+
 
