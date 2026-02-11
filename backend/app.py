@@ -140,15 +140,26 @@ def get_dashboard_stats():
     # Today's Stats
     today = conn.execute("SELECT date('now', 'localtime')").fetchone()[0]
     
-    present_today = conn.execute(
-        "SELECT COUNT(DISTINCT employee_id) FROM attendance WHERE date = ? AND status = 'Present'", 
-        (today,)
-    ).fetchone()[0]
-    
-    absent_today = conn.execute(
-        "SELECT COUNT(DISTINCT employee_id) FROM attendance WHERE date = ? AND status = 'Absent'", 
-        (today,)
-    ).fetchone()[0]
+   
+present_today = conn.execute(
+    '''
+    SELECT COUNT(DISTINCT a.employee_id) 
+    FROM attendance a 
+    JOIN employees e ON a.employee_id = e.id 
+    WHERE a.date = ? AND a.status = 'Present'
+    ''', 
+    (today,)
+).fetchone()[0]
+
+absent_today = conn.execute(
+    '''
+    SELECT COUNT(DISTINCT a.employee_id) 
+    FROM attendance a 
+    JOIN employees e ON a.employee_id = e.id 
+    WHERE a.date = ? AND a.status = 'Absent'
+    ''', 
+    (today,)
+).fetchone()[0]
     
     # Weekly Trend (Last 7 Days)
     # Generate last 7 days list first to ensure no gaps, or just query what we have
@@ -174,5 +185,6 @@ def get_dashboard_stats():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
+
 
 
